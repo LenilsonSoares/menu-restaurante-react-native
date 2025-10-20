@@ -1,0 +1,14 @@
+{
+  "name": "menu-restaurante-react-native",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo simples para app Expo em ./app",
+  "scripts": {
+    "install:app": "npm install --prefix app",
+    "start": "npm run start --prefix app",
+    "web": "npm run web --prefix app",
+    "android": "npm run android --prefix app",
+    "ios": "npm run ios --prefix app",
+    "tsc": "npm run tsc --prefix app"
+  }
+}
