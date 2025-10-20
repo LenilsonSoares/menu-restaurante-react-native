@@ -1,1 +1,0 @@
-Place app icons and splash images here if needed.

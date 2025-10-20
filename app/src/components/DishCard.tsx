@@ -16,7 +16,7 @@ export function DishCard({
   name: string;
   price: number;
   description?: string;
-  image?: string;
+  image?: string | number;
   onPress?: () => void;
   onAdd?: () => void;
   dotColor?: string;
@@ -25,7 +25,12 @@ export function DishCard({
     <View style={{ backgroundColor: colors.surface, borderRadius: radius.lg, padding: spacing.md, ...shadow.sm }}>
       <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', gap: spacing.md }}>
         <View style={{ width: 84, height: 84, backgroundColor: colors.surfaceMuted, borderRadius: radius.md, overflow: 'hidden' }}>
-          {image ? <Image source={{ uri: image }} style={{ width: '100%', height: '100%' }} /> : null}
+          {image ? (
+            <Image
+              source={typeof image === 'number' ? image : { uri: image }}
+              style={{ width: '100%', height: '100%' }}
+            />
+          ) : null}
         </View>
         <View style={{ flex: 1 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs }}>

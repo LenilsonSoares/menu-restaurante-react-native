@@ -29,7 +29,12 @@ export default function ProductDetailScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}>
       <View style={{ width: '100%', height: 240, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, marginBottom: spacing.lg }}>
-        {product.image ? <Image source={{ uri: product.image }} style={{ width: '100%', height: '100%' }} /> : null}
+        {product.image ? (
+          <Image
+            source={typeof product.image === 'number' ? product.image : { uri: product.image }}
+            style={{ width: '100%', height: '100%' }}
+          />
+        ) : null}
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <Text style={[typography.h2, { color: colors.text, flex: 1, marginRight: spacing.md }]}>{product.name}</Text>
