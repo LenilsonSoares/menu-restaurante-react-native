@@ -47,6 +47,6 @@ No terminal do Expo, escolha `a` (Android) ou `i` (iOS, se estiver em macOS) par
 
 ## Próximos passos
 
-- Ajustar UI/tema conforme slides do professor.
+- Ajustar UI/tema.
 - Opcional: persistir carrinho com AsyncStorage.
 - Adicionar testes básicos (se requerido).

@@ -18,6 +18,8 @@ web-build/
 # Expo
 .expo/
 .expo-shared/
+**/.expo/
+**/.expo-shared/
 
 # Metro Bundler cache
 .metro-cache/
