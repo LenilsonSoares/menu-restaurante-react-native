@@ -7,7 +7,7 @@ import { QuantityStepper } from '../components/QuantityStepper';
 import { Button } from '../components/Button';
 import { useCart } from '../state/cart.context';
 import { formatCurrency } from '../utils/formatCurrency';
-import { colors, spacing, typography } from '../theme';
+import { colors, spacing, typography, radius } from '../theme';
 
 type DetailRoute = RouteProp<RootStackParamList, 'ProductDetail'>;
 
@@ -28,15 +28,19 @@ export default function ProductDetailScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}>
-      <View style={{ width: '100%', height: 200, backgroundColor: colors.surfaceMuted, borderRadius: 12, marginBottom: spacing.md }}>
+      <View style={{ width: '100%', height: 240, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, marginBottom: spacing.lg }}>
         {product.image ? <Image source={{ uri: product.image }} style={{ width: '100%', height: '100%' }} /> : null}
       </View>
-      <Text style={[typography.h2, { color: colors.text }]}>{product.name}</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Text style={[typography.h2, { color: colors.text, flex: 1, marginRight: spacing.md }]}>{product.name}</Text>
+        <Text style={[typography.h2, { color: colors.text }]}>{formatCurrency(product.price)}</Text>
+      </View>
       <Text style={[typography.body, { color: colors.textMuted, marginTop: spacing.sm }]}>{product.description}</Text>
-      <Text style={[typography.h3, { marginTop: spacing.sm, color: colors.text }]}>{formatCurrency(product.price)}</Text>
 
-      <View style={{ marginTop: spacing.lg, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-        <QuantityStepper value={qtd} onDec={() => setQtd(Math.max(1, qtd - 1))} onInc={() => setQtd(qtd + 1)} />
+      <View style={{ marginTop: spacing.xl, alignItems: 'center', gap: spacing.lg }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: colors.surfaceMuted, borderRadius: radius.pill, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm }}>
+          <QuantityStepper value={qtd} onDec={() => setQtd(Math.max(1, qtd - 1))} onInc={() => setQtd(qtd + 1)} />
+        </View>
         <Button
           title={`Adicionar (${formatCurrency(product.price * qtd)})`}
           onPress={() => {
