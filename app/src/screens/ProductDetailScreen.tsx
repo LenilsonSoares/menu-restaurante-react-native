@@ -28,11 +28,12 @@ export default function ProductDetailScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}>
-      <View style={{ width: '100%', height: 240, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, marginBottom: spacing.lg }}>
+      <View style={{ width: '100%', height: 240, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, marginBottom: spacing.lg, overflow: 'hidden' }}>
         {product.image ? (
           <Image
             source={typeof product.image === 'number' ? product.image : { uri: product.image }}
             style={{ width: '100%', height: '100%' }}
+            resizeMode="cover"
           />
         ) : null}
       </View>

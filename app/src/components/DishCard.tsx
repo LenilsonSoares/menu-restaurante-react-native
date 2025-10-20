@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { formatCurrency } from '../utils/formatCurrency';
@@ -21,22 +21,40 @@ export function DishCard({
   onAdd?: () => void;
   dotColor?: string;
 }) {
+  const [imgError, setImgError] = useState(false);
+
   return (
     <View style={{ backgroundColor: colors.surface, borderRadius: radius.lg, padding: spacing.md, ...shadow.sm }}>
       <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', gap: spacing.md }}>
-        <View style={{ width: 84, height: 84, backgroundColor: colors.surfaceMuted, borderRadius: radius.md, overflow: 'hidden' }}>
-          {image ? (
+        <View style={{ width: 92, height: 92, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }}>
+          {image && !imgError ? (
             <Image
               source={typeof image === 'number' ? image : { uri: image }}
               style={{ width: '100%', height: '100%' }}
+              resizeMode="cover"
+              onError={(e) => {
+                console.warn('Falha ao carregar imagem do prato', e.nativeEvent);
+                setImgError(true);
+              }}
             />
-          ) : null}
+          ) : (
+            <Text style={{ color: colors.textMuted }}>sem imagem</Text>
+          )}
         </View>
         <View style={{ flex: 1 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs }}>
-            {(
-              <View style={{ width: 8, height: 8, borderRadius: radius.pill, backgroundColor: dotColor ?? colors.success }} />
-            )}
+            {
+              (
+                <View
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 2,
+                    backgroundColor: dotColor ?? colors.success,
+                  }}
+                />
+              )
+            }
             <Text style={[typography.h3, { color: colors.text }]}>{name}</Text>
           </View>
           {description ? (
@@ -58,17 +76,19 @@ export function DishCard({
             position: 'absolute',
             right: spacing.md,
             bottom: spacing.md,
-            width: 36,
-            height: 36,
+            height: 30,
+            minWidth: 44,
+            paddingHorizontal: spacing.sm,
             borderRadius: radius.pill,
             backgroundColor: colors.surfaceMuted,
             alignItems: 'center',
             justifyContent: 'center',
             borderWidth: 1,
             borderColor: colors.border,
+            ...shadow.sm,
           }}
         >
-          <MaterialCommunityIcons name="plus" size={22} color={colors.text} />
+          <MaterialCommunityIcons name="plus" size={20} color={colors.text} />
         </TouchableOpacity>
       ) : null}
     </View>

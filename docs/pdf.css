@@ -1,0 +1,39 @@
+@page {
+  size: A4;
+  margin: 20mm 18mm 22mm 18mm;
+}
+
+:root {
+  --text: #1f2937;
+  --muted: #6b7280;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+h1, h2, h3, h4 {
+  color: var(--text);
+  page-break-after: avoid;
+}
+
+h1 { font-size: 22pt; }
+h2 { font-size: 16pt; }
+h3 { font-size: 12pt; }
+
+hr { border: none; border-top: 1px solid #e5e7eb; margin: 16px 0; }
+
+blockquote { color: var(--muted); }
+
+code, pre { font-family: "Consolas", "Courier New", monospace; }
+
+/* Rodapé com numeração */
+@page {
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    color: var(--muted);
+    font-size: 9pt;
+  }
+}

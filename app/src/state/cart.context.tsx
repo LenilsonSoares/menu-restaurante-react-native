@@ -1,13 +1,8 @@
 import React, { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-export type CartItem = {
-  productId: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image?: string | number;
-};
+import { container } from '@/container';
+import type { CartItem } from '@/domain/cart/models';
+import { computeTotals } from '@/domain/cart/calculations';
+import * as Cart from '@/application/usecases/cart';
 
 type CartState = {
   items: CartItem[];
@@ -27,41 +22,22 @@ function reducer(state: CartState, action: Action): CartState {
   switch (action.type) {
     case 'HYDRATE':
       return { items: action.items };
-    case 'ADD': {
-      const existing = state.items.find(i => i.productId === action.item.productId);
-      if (existing) {
-        return {
-          items: state.items.map(i =>
-            i.productId === action.item.productId ? { ...i, quantity: i.quantity + action.item.quantity } : i
-          ),
-        };
-      }
-      return { items: [...state.items, action.item] };
-    }
+    case 'ADD':
+      return { items: Cart.addItem(state.items, action.item) };
     case 'REMOVE':
-      return { items: state.items.filter(i => i.productId !== action.productId) };
+      return { items: Cart.removeItem(state.items, action.productId) };
     case 'INCREMENT':
-      return { items: state.items.map(i => (i.productId === action.productId ? { ...i, quantity: i.quantity + 1 } : i)) };
+      return { items: Cart.increment(state.items, action.productId) };
     case 'DECREMENT':
-      return {
-        items: state.items
-          .map(i => (i.productId === action.productId ? { ...i, quantity: i.quantity - 1 } : i))
-          .filter(i => i.quantity > 0),
-      };
+      return { items: Cart.decrement(state.items, action.productId) };
     case 'CLEAR':
-      return { items: [] };
+      return { items: Cart.clear() };
     default:
       return state;
   }
 }
 
-function computeTotals(items: CartItem[]) {
-  const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-  const fee = 0; // pode parametrizar taxa
-  const total = subtotal + fee;
-  const count = items.reduce((sum, i) => sum + i.quantity, 0);
-  return { subtotal, fee, total, count };
-}
+// computeTotals veio do domínio (calculations)
 
 type CartContextType = {
   items: CartItem[];
@@ -81,19 +57,14 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const totals = useMemo(() => computeTotals(state.items), [state.items]);
-  const STORAGE_KEY = 'cart:v1';
+  const cartStorage = container.cartStorage;
 
   // Hidratar do armazenamento ao iniciar
   useEffect(() => {
     (async () => {
       try {
-        const raw = await AsyncStorage.getItem(STORAGE_KEY);
-        if (raw) {
-          const parsed = JSON.parse(raw) as CartItem[];
-          if (Array.isArray(parsed)) {
-            dispatch({ type: 'HYDRATE', items: parsed });
-          }
-        }
+        const items = await cartStorage.load();
+        dispatch({ type: 'HYDRATE', items });
       } catch (e) {
         // silencioso: não bloqueia app se falhar persistência
       }
@@ -104,7 +75,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     (async () => {
       try {
-        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state.items));
+        await cartStorage.save(state.items);
       } catch (e) {
         // silencioso
       }
