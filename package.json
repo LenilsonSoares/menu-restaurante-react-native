@@ -6,6 +6,9 @@
   "scripts": {
     "install:app": "npm install --prefix app",
     "start": "npm run start --prefix app",
+    "start:tunnel": "npm run start:tunnel --prefix app",
+    "start:lan": "npm run start:lan --prefix app",
+    "start:localhost": "npm run start:localhost --prefix app",
     "web": "npm run web --prefix app",
     "android": "npm run android --prefix app",
     "ios": "npm run ios --prefix app",
