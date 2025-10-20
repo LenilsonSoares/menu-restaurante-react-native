@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Alert } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import type { RootStackParamList } from '../navigation/RootNavigator';
 import { products } from '../data/products';
@@ -39,7 +39,10 @@ export default function ProductDetailScreen() {
         <QuantityStepper value={qtd} onDec={() => setQtd(Math.max(1, qtd - 1))} onInc={() => setQtd(qtd + 1)} />
         <Button
           title={`Adicionar (${formatCurrency(product.price * qtd)})`}
-          onPress={() => add({ productId: product.id, name: product.name, price: product.price, quantity: qtd, image: product.image })}
+          onPress={() => {
+            add({ productId: product.id, name: product.name, price: product.price, quantity: qtd, image: product.image });
+            Alert.alert('Adicionado', `${product.name} x${qtd} foi adicionado ao carrinho.`);
+          }}
         />
       </View>
     </View>

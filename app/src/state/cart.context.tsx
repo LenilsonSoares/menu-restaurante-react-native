@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useMemo, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type CartItem = {
   productId: string;
@@ -17,12 +18,15 @@ type Action =
   | { type: 'REMOVE'; productId: string }
   | { type: 'INCREMENT'; productId: string }
   | { type: 'DECREMENT'; productId: string }
-  | { type: 'CLEAR' };
+  | { type: 'CLEAR' }
+  | { type: 'HYDRATE'; items: CartItem[] };
 
 const initialState: CartState = { items: [] };
 
 function reducer(state: CartState, action: Action): CartState {
   switch (action.type) {
+    case 'HYDRATE':
+      return { items: action.items };
     case 'ADD': {
       const existing = state.items.find(i => i.productId === action.item.productId);
       if (existing) {
@@ -77,6 +81,35 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const totals = useMemo(() => computeTotals(state.items), [state.items]);
+  const STORAGE_KEY = 'cart:v1';
+
+  // Hidratar do armazenamento ao iniciar
+  useEffect(() => {
+    (async () => {
+      try {
+        const raw = await AsyncStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw) as CartItem[];
+          if (Array.isArray(parsed)) {
+            dispatch({ type: 'HYDRATE', items: parsed });
+          }
+        }
+      } catch (e) {
+        // silencioso: não bloqueia app se falhar persistência
+      }
+    })();
+  }, []);
+
+  // Salvar sempre que os itens mudarem
+  useEffect(() => {
+    (async () => {
+      try {
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state.items));
+      } catch (e) {
+        // silencioso
+      }
+    })();
+  }, [state.items]);
 
   const value = useMemo<CartContextType>(
     () => ({
