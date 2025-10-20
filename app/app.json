@@ -4,14 +4,24 @@
     "slug": "menu-restaurante",
     "version": "1.0.0",
     "sdkVersion": "51.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "orientation": "portrait",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
-    "ios": { "supportsTablet": true },
-    "android": {},
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.anonymous.menurestaurante"
+    },
     "web": {}
   }
 }
