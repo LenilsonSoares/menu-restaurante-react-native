@@ -4,7 +4,7 @@
  * - `onAdd` adiciona ao carrinho (opcional)
  */
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, ImageSourcePropType } from 'react-native';
+import { View, Text, Pressable, Image, ImageSourcePropType } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { formatCurrency } from '../utils/formatCurrency';
 import { colors, spacing, typography, radius, shadow } from '../theme';
@@ -38,13 +38,17 @@ export function DishCard({
     : undefined;
 
   return (
-    <View style={{ backgroundColor: colors.surface, borderRadius: radius.lg, padding: spacing.md, ...shadow.sm }}>
-      <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', gap: spacing.md }}>
-        <View style={{ width: 92, height: 92, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ backgroundColor: colors.surface, borderRadius: radius.lg, padding: spacing.md, position: 'relative', ...shadow.sm }}>
+      <Pressable
+        onPress={onPress}
+        android_ripple={{ color: '#00000010' }}
+        style={({ pressed }) => ({ flexDirection: 'row', gap: spacing.md, opacity: pressed ? 0.95 : 1 })}
+      >
+  <View style={{ width: 96, aspectRatio: 1, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }}>
           {src && !imgError ? (
             <Image
               source={src as any}
-              style={{ width: '100%', height: '100%' }}
+              style={{ width: '100%', height: '100%', transform: [{ scale: 1.05 }] }}
               resizeMode="cover"
               onError={(e) => {
                 console.warn('Falha ao carregar imagem do prato', e.nativeEvent);
@@ -54,6 +58,7 @@ export function DishCard({
           ) : (
             <Text style={{ color: colors.textMuted }}>sem imagem</Text>
           )}
+          {/* Botão '+' removido daqui para manter posição consistente relativa ao card inteiro */}
         </View>
         <View style={{ flex: 1 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs }}>
@@ -80,30 +85,32 @@ export function DishCard({
             {formatCurrency(price)}
           </Text>
         </View>
-      </TouchableOpacity>
+      </Pressable>
       {onAdd ? (
-        <TouchableOpacity
-          onPress={onAdd}
-          accessibilityRole="button"
-          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-          style={{
+        <Pressable
+          onPress={() => onAdd?.()}
+          android_ripple={{ color: '#00000010' }}
+          style={({ pressed }) => ({
             position: 'absolute',
             right: spacing.md,
             bottom: spacing.md,
-            height: 30,
-            minWidth: 44,
-            paddingHorizontal: spacing.sm,
+            height: 32,
+            width: 44,
             borderRadius: radius.pill,
-            backgroundColor: colors.surfaceMuted,
-            alignItems: 'center',
-            justifyContent: 'center',
+            backgroundColor: colors.surface,
             borderWidth: 1,
             borderColor: colors.border,
+            alignItems: 'center',
+            justifyContent: 'center',
+            opacity: pressed ? 0.9 : 1,
+            zIndex: 2,
             ...shadow.sm,
-          }}
+          })}
+          accessibilityRole="button"
+          hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
         >
-          <MaterialCommunityIcons name="plus" size={20} color={colors.text} />
-        </TouchableOpacity>
+          <MaterialCommunityIcons name="plus" size={18} color={colors.text} />
+        </Pressable>
       ) : null}
     </View>
   );

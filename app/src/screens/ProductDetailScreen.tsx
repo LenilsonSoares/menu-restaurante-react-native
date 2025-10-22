@@ -36,7 +36,7 @@ export default function ProductDetailScreen() {
       <View
         style={{
           width: '100%',
-          height: 240,
+          aspectRatio: 16 / 9,
           backgroundColor: colors.surfaceMuted,
           borderRadius: radius.lg,
           marginBottom: spacing.lg,
@@ -50,7 +50,7 @@ export default function ProductDetailScreen() {
                 ? { uri: product.image }
                 : (product.image as ImageSourcePropType)
             }
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%', height: '100%', transform: [{ scale: 1.05 }] }}
             resizeMode="cover"
           />
         ) : null}
