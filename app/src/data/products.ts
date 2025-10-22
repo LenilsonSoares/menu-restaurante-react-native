@@ -45,5 +45,8 @@ export const products: Product[] = [
     categoryId: 'drinks',
     image: require('../../assets/images/refri.png'),
   },
-  { id: 'p5', name: 'Sorvete', description: 'Baunilha', price: 12.0, categoryId: 'desserts' },
+  { id: 'p5', 
+    name: 'Sorvete', 
+    description: 'Baunilha', price: 12.0, categoryId: 'desserts',
+  image: require('../../assets/images/sorvete.png')},
 ];
