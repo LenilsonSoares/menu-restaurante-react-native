@@ -99,6 +99,7 @@ Estrutura modular sob `app/src`:
 - `data/` — dados estáticos (produtos e categorias).
 - `state/` — contexto do carrinho, totais e persistência.
 - `theme/` — paleta de cores, tipografia, espaçamentos e tokens.
+
 ```markdown
 # Desenvolvimento de uma Interface de Menu de Restaurante com React Native
 
@@ -136,7 +137,7 @@ Resumo .........................................................................
   4.2. Aprendizados Adquiridos ................................................ 11
   4.3. Trabalhos Futuros e Melhorias ...................................... 12
 5. Referências ................................................................................ 13
-	
+ 
 
 ‘Resumo
 Este relatório descreve o desenvolvimento de uma interface de menu de restaurante utilizando React Native e Expo. O objetivo foi reproduzir, com alta fidelidade, uma tela de listagem de itens e uma tela de detalhes baseada em uma imagem de referência, focando em componentização, boas práticas de estilização e renderização eficiente de listas. A metodologia envolveu: (i) análise do layout de referência; (ii) definição dos componentes; (iii) estruturação de navegação; (iv) implementação visual; e (v) persistência simples do carrinho. Como resultado, o aplicativo apresenta uma tela inicial com banner, categorias e seção de destaques, uma tela de categoria listando produtos e tela de detalhes com seleção de quantidade e adição ao carrinho. O trabalho reforçou conhecimentos de UI/UX em mobile, organização de projeto e uso do ecossistema Expo.

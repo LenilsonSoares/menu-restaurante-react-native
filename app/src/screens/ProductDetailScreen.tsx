@@ -1,3 +1,7 @@
+/**
+ * Tela de detalhes do produto.
+ * Mostra imagem, descrição, preço e permite selecionar quantidade e adicionar ao carrinho.
+ */
 import React, { useState } from 'react';
 import { View, Text, Image, Alert } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';

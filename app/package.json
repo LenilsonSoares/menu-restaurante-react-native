@@ -11,7 +11,8 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "tsc": "tsc -p tsconfig.json --noEmit"
+    "tsc": "tsc -p tsconfig.json --noEmit",
+    "docs": "typedoc"
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",
@@ -20,12 +21,12 @@
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
-    "expo": "54.0.13",
+    "expo": "54.0.17",
     "expo-splash-screen": "~31.0.10",
     "expo-status-bar": "~3.0.8",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-native": "0.81.4",
+    "react-native": "0.81.5",
     "react-native-gesture-handler": "~2.28.0",
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0",
@@ -33,11 +34,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "@types/jest": "^30.0.0",
+    "@types/jest": "29.5.14",
     "@types/react": "~19.1.10",
     "babel-plugin-module-resolver": "^5.0.2",
     "babel-preset-expo": "~54.0.0",
-    "jest-expo": "^54.0.12",
-    "typescript": "~5.9.2"
+    "jest-expo": "~54.0.13",
+    "typescript": "~5.9.2",
+    "typedoc": "^0.27.6"
   }
 }

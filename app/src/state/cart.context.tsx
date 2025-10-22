@@ -1,3 +1,11 @@
+/**
+ * Contexto/Provider do carrinho.
+ *
+ * Responsável por:
+ * - Manter o estado (itens) com um reducer puro.
+ * - Expor operações de alto nível (add/remove/increment/decrement/clear).
+ * - Hidratar do armazenamento ao montar e persistir em cada alteração.
+ */
 import React, { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
 import { container } from '@/container';
 import type { CartItem } from '@/domain/cart/models';
@@ -18,6 +26,9 @@ type Action =
 
 const initialState: CartState = { items: [] };
 
+/**
+ * Lida com as transições do estado do carrinho a partir das ações de domínio.
+ */
 function reducer(state: CartState, action: Action): CartState {
   switch (action.type) {
     case 'HYDRATE':
@@ -54,6 +65,9 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+/**
+ * Componente provider que injeta o estado e ações do carrinho via Context API.
+ */
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const totals = useMemo(() => computeTotals(state.items), [state.items]);
@@ -98,6 +112,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
+/**
+ * Hook para acessar o carrinho. Deve ser usado dentro de `CartProvider`.
+ */
 export function useCart() {
   const ctx = useContext(CartContext);
   if (!ctx) throw new Error('useCart deve ser usado dentro de CartProvider');

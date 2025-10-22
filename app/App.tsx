@@ -1,3 +1,10 @@
+/**
+ * Raiz do aplicativo.
+ *
+ * - Controla splash screen até pré-carregar recursos (imagens).
+ * - Envolve a UI com provedores (GestureHandler, SafeArea, CartProvider).
+ * - Renderiza o `RootNavigator` com as rotas.
+ */
 import React, { useCallback, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import RootNavigator from './src/navigation/RootNavigator';

@@ -1,3 +1,6 @@
+/**
+ * Escala de espaçamento em pontos (dp).
+ */
 export const spacing = {
   xs: 4,
   sm: 8,

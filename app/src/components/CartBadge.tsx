@@ -1,3 +1,7 @@
+/**
+ * Botão de atalho para o carrinho com badge numérica.
+ * Exibe o total de unidades no carrinho quando > 0.
+ */
 import React from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import { colors } from '../theme';

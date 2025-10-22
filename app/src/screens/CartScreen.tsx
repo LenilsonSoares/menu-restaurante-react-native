@@ -1,3 +1,6 @@
+/**
+ * Tela do carrinho: lista itens, permite ajustar quantidades, remover e seguir para checkout.
+ */
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';

@@ -1,3 +1,6 @@
+/**
+ * Tipos e dados estáticos de categorias para o cardápio.
+ */
 export type Category = { id: string; name: string };
 
 export const categories: Category[] = [

@@ -1,3 +1,7 @@
+/**
+ * Paleta de cores da aplicação.
+ * Ajustada para um visual quente e acolhedor (restaurante).
+ */
 // Paleta 1 — Burgers & BBQ
 export const colors = {
   primary: '#C0392B', // vermelho convidativo

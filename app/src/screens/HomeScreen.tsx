@@ -1,3 +1,7 @@
+/**
+ * Tela inicial: banner, categorias e destaques.
+ * Mostra lista curta de produtos em destaque e atalhos para categorias.
+ */
 import React, { useMemo } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';

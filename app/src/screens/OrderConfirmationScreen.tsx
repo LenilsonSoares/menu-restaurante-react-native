@@ -1,3 +1,6 @@
+/**
+ * Tela de confirmação do pedido: exibe o código gerado para referência.
+ */
 import React from 'react';
 import { View, Text } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';

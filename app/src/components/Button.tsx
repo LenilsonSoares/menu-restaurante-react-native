@@ -1,3 +1,13 @@
+/**
+ * Botão primário estilizado.
+ *
+ * Props:
+ * - title: rótulo do botão.
+ * - onPress: callback de clique.
+ *
+ * Acessibilidade:
+ * - accessibilityRole="button" e hitSlop para área de toque ampliada.
+ */
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { colors, spacing, typography, radius, shadow } from '../theme';

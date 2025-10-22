@@ -1,3 +1,10 @@
+/**
+ * Controle de quantidade com botões +/−.
+ *
+ * Props:
+ * - value: quantidade atual.
+ * - onDec/onInc: callbacks para decrementar/incrementar.
+ */
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';

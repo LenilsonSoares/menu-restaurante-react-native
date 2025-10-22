@@ -1,3 +1,7 @@
+/**
+ * Tipos e dados estáticos de produtos para exibição e navegação.
+ * Em produção, estes dados viriam de uma API.
+ */
 export type Product = {
   id: string;
   name: string;

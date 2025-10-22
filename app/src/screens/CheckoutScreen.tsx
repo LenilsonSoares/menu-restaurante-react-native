@@ -1,3 +1,7 @@
+/**
+ * Tela de checkout: coleta dados básicos, método de entrega e pagamento,
+ * e confirma o pedido gerando um código simples.
+ */
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';

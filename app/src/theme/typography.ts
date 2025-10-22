@@ -1,3 +1,6 @@
+/**
+ * Estilos tipográficos básicos para títulos/corpo/legenda.
+ */
 export const typography = {
   h1: { fontSize: 24, fontWeight: '700' as const },
   h2: { fontSize: 20, fontWeight: '700' as const },

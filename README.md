@@ -8,6 +8,28 @@ Este repositório contém um app de cardápio com carrinho e checkout, criado em
 - `docs/` — documentação (arquitetura, requisitos).
 - `arquivos do projeto/` — imagens/slides do professor.
 
+## Documentação da API (TypeDoc)
+
+A documentação gerada automaticamente a partir dos comentários do código (JSDoc) está disponível em:
+
+- `docs/api/index.html`
+
+Abra esse arquivo no navegador para navegar pelos módulos, tipos e funções.
+
+### Como gerar/atualizar a documentação
+
+Na primeira vez, instale as dependências dentro da pasta `app/` e gere a documentação:
+
+```powershell
+cd app
+npm install --legacy-peer-deps
+npm run docs
+```
+
+Isso vai produzir/atualizar os arquivos HTML em `docs/api`.
+
+Observação: você pode ver um aviso do TypeDoc sobre a versão do TypeScript. A geração ainda funciona; se quiser eliminar o aviso, podemos alinhar a versão do TS suportada pelo TypeDoc.
+
 ## Rodando o projeto (Windows PowerShell)
 
 Você pode rodar os comandos a partir da RAIZ do repositório (recomendado) ou entrando na pasta `app/`.

@@ -1,3 +1,8 @@
+/**
+ * Card de prato com imagem, nome, preço e ação opcional de adicionar.
+ * - `onPress` abre detalhes (opcional)
+ * - `onAdd` adiciona ao carrinho (opcional)
+ */
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';

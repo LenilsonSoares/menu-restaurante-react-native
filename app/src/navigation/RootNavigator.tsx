@@ -1,3 +1,7 @@
+/**
+ * Navegação raiz do app (React Navigation - Native Stack).
+ * Define as rotas principais e título/ações de cabeçalho.
+ */
 import React from 'react';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,6 +13,9 @@ import CheckoutScreen from '../screens/CheckoutScreen';
 import OrderConfirmationScreen from '../screens/OrderConfirmationScreen';
 import { CartBadge } from '../components/CartBadge';
 
+/**
+ * Tipagem dos parâmetros de rota.
+ */
 export type RootStackParamList = {
   Home: undefined;
   Category: { categoryId: string; title: string };
@@ -20,6 +27,9 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+/**
+ * Tema leve: mantém cores padrão, alterando apenas o background.
+ */
 const theme = {
   ...DefaultTheme,
   colors: {

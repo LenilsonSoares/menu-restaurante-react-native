@@ -1,3 +1,7 @@
+/**
+ * Lista horizontal de categorias.
+ * Ao tocar em uma categoria, navega para a tela de listagem da categoria.
+ */
 import React from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';

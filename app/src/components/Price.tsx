@@ -1,3 +1,6 @@
+/**
+ * Exibe um valor monetário formatado (BRL) com estilo opcional.
+ */
 import React from 'react';
 import { Text, StyleProp, TextStyle } from 'react-native';
 import { formatCurrency } from '../utils/formatCurrency';

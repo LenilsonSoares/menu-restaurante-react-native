@@ -1,3 +1,7 @@
+/**
+ * Tela de listagem por categoria.
+ * Recebe `categoryId` via rota e filtra os produtos exibidos.
+ */
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
