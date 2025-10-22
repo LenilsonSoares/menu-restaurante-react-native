@@ -16,12 +16,21 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+  "icon": "./assets/images/restaurante.png",
     "ios": {
-      "supportsTablet": true
+  "supportsTablet": true
     },
     "android": {
-      "package": "com.anonymous.menurestaurante"
+      "package": "com.anonymous.menurestaurante",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/restaurante.png",
+        "backgroundColor": "#FFFFFF"
+      }
     },
-    "web": {}
+    "web": {
+      "favicon": "./assets/images/restaurante.png",
+      "themeColor": "#ffffff",
+      "backgroundColor": "#ffffff"
+    }
   }
 }

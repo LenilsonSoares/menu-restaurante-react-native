@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, Image, Alert, ImageSourcePropType } from 'react-native';
+import { View, Text, Image, Alert, ImageSourcePropType, Platform } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import type { RootStackParamList } from '../navigation/RootNavigator';
 import { products } from '../data/products';
@@ -41,6 +41,8 @@ export default function ProductDetailScreen() {
           borderRadius: radius.lg,
           marginBottom: spacing.lg,
           overflow: 'hidden',
+          // No Web, limite a altura do banner para evitar "zoom" exagerado em telas largas
+          ...(Platform.OS === 'web' ? { maxHeight: 420 } : {}),
         }}
       >
         {product.image ? (
@@ -50,8 +52,15 @@ export default function ProductDetailScreen() {
                 ? { uri: product.image }
                 : (product.image as ImageSourcePropType)
             }
-            style={{ width: '100%', height: '100%', transform: [{ scale: 1.05 }] }}
-            resizeMode="cover"
+            style={{
+              width: '100%',
+              height: '100%',
+              // Em dispositivos nativos, mantemos um leve zoom para dar impacto visual;
+              // no Web, removemos o zoom para evitar cortes agressivos.
+              ...(Platform.OS === 'web' ? {} : { transform: [{ scale: 1.05 }] }),
+            }}
+            // No Web usamos 'contain' para mostrar a imagem inteira; no nativo mantemos 'cover'.
+            resizeMode={Platform.OS === 'web' ? 'contain' : 'cover'}
           />
         ) : null}
       </View>
