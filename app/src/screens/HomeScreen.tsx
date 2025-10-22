@@ -74,7 +74,15 @@ export default function HomeScreen() {
             </View>
 
             {/* Abas de categorias */}
-            <View style={{ backgroundColor: colors.primaryDark, borderRadius: radius.pill, padding: spacing.xs, marginBottom: spacing.md }}>
+            <View
+              style={{
+                backgroundColor: colors.primaryDark,
+                borderRadius: radius.pill,
+                paddingVertical: spacing.xs,
+                paddingHorizontal: spacing.sm,
+                marginBottom: spacing.md,
+              }}
+            >
               <CategoryList categories={categories} />
             </View>
           </View>
