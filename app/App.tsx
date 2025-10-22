@@ -25,6 +25,9 @@ export default function App() {
       // Pré-carrega imagens locais usadas nos produtos/telas
       const assets = [
         require('./assets/images/pizza.png'),
+        require('./assets/images/hamburguer.png'),
+        require('./assets/images/hamburguer1.png'),
+        require('./assets/images/refri.png'),
       ];
       await Promise.all(assets.map((m) => Asset.fromModule(m).downloadAsync()));
     } finally {

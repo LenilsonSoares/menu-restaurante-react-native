@@ -3,7 +3,7 @@
  * Mostra lista curta de produtos em destaque e atalhos para categorias.
  */
 import React, { useMemo } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, SectionList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { categories } from '../data/categories';
@@ -20,12 +20,18 @@ export default function HomeScreen() {
   const navigation = useNavigation<Nav>();
   const { add } = useCart();
 
-  // Escolhe alguns produtos como "destaques" — prioriza pizzas se existirem
-  const featured = useMemo(() => {
-    const pizzas = products.filter(p => p.categoryId === 'pizzas');
-    const base = pizzas.length > 0 ? pizzas : products;
-    return base.slice(0, 5);
-  }, []);
+  // Seções por categoria: mantém todos os produtos na Home, agrupados
+  const sections = useMemo(
+    () =>
+      categories
+        .map((c) => ({
+          title: c.name,
+          key: c.id,
+          data: products.filter((p) => p.categoryId === c.id),
+        }))
+        .filter((s) => s.data.length > 0),
+    []
+  );
 
   const dotByCategory: Record<string, string> = {
     burgers: colors.danger,
@@ -37,8 +43,10 @@ export default function HomeScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       {/* Conteúdo rolável */}
-      <FlatList
-        contentContainerStyle={{ padding: spacing.lg, paddingBottom: spacing.xl }}
+      <SectionList
+        sections={sections}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{ padding: spacing.lg, paddingBottom: spacing.xl, gap: spacing.lg }}
         ListHeaderComponent={
           <View>
             {/* Banner/Logo */}
@@ -59,12 +67,14 @@ export default function HomeScreen() {
             <View style={{ backgroundColor: colors.primaryDark, borderRadius: radius.pill, padding: spacing.xs, marginBottom: spacing.md }}>
               <CategoryList categories={categories} />
             </View>
-
-            <Text style={[typography.h3, { color: colors.text, marginTop: spacing.sm, marginBottom: spacing.sm }]}>Destaques:</Text>
           </View>
         }
-        data={featured}
-        keyExtractor={(item) => item.id}
+        renderSectionHeader={({ section }) => (
+          <Text style={[typography.h3, { color: colors.text, marginTop: spacing.sm, marginBottom: spacing.sm }]}>
+            {section.title}
+          </Text>
+        )}
+        SectionSeparatorComponent={() => <View style={{ height: spacing.md }} />}
         ItemSeparatorComponent={() => <View style={{ height: spacing.md }} />}
         renderItem={({ item }) => (
           <DishCard

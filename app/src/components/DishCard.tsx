@@ -4,7 +4,7 @@
  * - `onAdd` adiciona ao carrinho (opcional)
  */
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ImageSourcePropType } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { formatCurrency } from '../utils/formatCurrency';
 import { colors, spacing, typography, radius, shadow } from '../theme';
@@ -21,20 +21,29 @@ export function DishCard({
   name: string;
   price: number;
   description?: string;
-  image?: string | number;
+  /**
+   * Aceita tanto uma URL (string) quanto um asset local (ImageSourcePropType).
+   * No Expo Web, `require('...')` pode retornar um objeto; por isso aceitamos ImageSourcePropType.
+   */
+  image?: string | ImageSourcePropType;
   onPress?: () => void;
   onAdd?: () => void;
   dotColor?: string;
 }) {
   const [imgError, setImgError] = useState(false);
+  const src = image
+    ? typeof image === 'string'
+      ? { uri: image }
+      : (image as ImageSourcePropType)
+    : undefined;
 
   return (
     <View style={{ backgroundColor: colors.surface, borderRadius: radius.lg, padding: spacing.md, ...shadow.sm }}>
       <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', gap: spacing.md }}>
         <View style={{ width: 92, height: 92, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }}>
-          {image && !imgError ? (
+          {src && !imgError ? (
             <Image
-              source={typeof image === 'number' ? image : { uri: image }}
+              source={src as any}
               style={{ width: '100%', height: '100%' }}
               resizeMode="cover"
               onError={(e) => {
