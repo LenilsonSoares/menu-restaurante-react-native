@@ -60,3 +60,6 @@ desktop.ini
 tmp/
 temp/
 .tmp/
+
+# Docs
+docs/api/

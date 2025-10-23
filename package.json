@@ -12,10 +12,6 @@
     "web": "npm run web --prefix app",
     "android": "npm run android --prefix app",
     "ios": "npm run ios --prefix app",
-    "tsc": "npm run tsc --prefix app",
-    "pdf": "md-to-pdf docs/relatorio-projeto.md --document-title 'Relatório do Projeto' --stylesheet docs/pdf.css --config-file docs/md-to-pdf.config.json"
-  },
-  "devDependencies": {
-    "md-to-pdf": "^5.2.4"
+    "tsc": "npm run tsc --prefix app"
   }
 }
