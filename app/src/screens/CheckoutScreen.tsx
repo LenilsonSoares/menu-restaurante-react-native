@@ -2,41 +2,41 @@
  * Tela de checkout: coleta dados básicos, método de entrega e pagamento,
  * e confirma o pedido gerando um código simples.
  */
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type { RootStackParamList } from '../navigation/RootNavigator';
-import { useCart } from '../state/cart.context';
-import { formatCurrency } from '../utils/formatCurrency';
-import { colors, spacing, typography } from '../theme';
+import React, { useState } from 'react'; // React e estado local para formulário
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native'; // Componentes básicos de UI
+import { useNavigation } from '@react-navigation/native'; // Navegação
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'; // Tipagem da navegação
+import type { RootStackParamList } from '../navigation/RootNavigator'; // Tipos das rotas
+import { useCart } from '../state/cart.context'; // Ações e totais do carrinho
+import { formatCurrency } from '../utils/formatCurrency'; // Formatação de preço
+import { colors, spacing, typography } from '../theme'; // Tokens de estilo
 
-type Nav = NativeStackNavigationProp<RootStackParamList>;
+type Nav = NativeStackNavigationProp<RootStackParamList>; // Alias para uso no hook de navegação
 
-export default function CheckoutScreen() {
-  const navigation = useNavigation<Nav>();
-  const { total, clear } = useCart();
-  const [nome, setNome] = useState('');
-  const [entrega, setEntrega] = useState<'local' | 'retirada' | 'delivery'>('local');
-  const [pagamento, setPagamento] = useState<'dinheiro' | 'cartao' | 'pix'>('dinheiro');
+export default function CheckoutScreen() { // Tela de checkout e confirmação
+  const navigation = useNavigation<Nav>(); // Acesso à navegação
+  const { total, clear } = useCart(); // Total atual e ação para limpar carrinho
+  const [nome, setNome] = useState(''); // Campo de nome
+  const [entrega, setEntrega] = useState<'local' | 'retirada' | 'delivery'>('local'); // Método de entrega
+  const [pagamento, setPagamento] = useState<'dinheiro' | 'cartao' | 'pix'>('dinheiro'); // Forma de pagamento
 
-  function confirmar() {
-    if (!nome.trim()) {
+  function confirmar() { // Valida dados e finaliza pedido
+    if (!nome.trim()) { // Nome obrigatório
       Alert.alert('Atenção', 'Informe seu nome.');
       return;
     }
-    const orderId = Math.random().toString(36).slice(2, 8).toUpperCase();
-    clear();
-  navigation.navigate('OrderConfirmation', { orderId });
+    const orderId = Math.random().toString(36).slice(2, 8).toUpperCase(); // Gera código simples do pedido
+    clear(); // Limpa carrinho após confirmar
+    navigation.navigate('OrderConfirmation', { orderId }); // Vai para tela de confirmação
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg, gap: spacing.md }}>
+    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg, gap: spacing.md }}> {/* Container */}
       <Text style={[typography.h3, { color: colors.text }]}>Seus dados</Text>
-      <TextInput placeholder="Nome" value={nome} onChangeText={setNome} style={{ borderWidth: 1, borderColor: colors.border, borderRadius: 8, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm, backgroundColor: colors.surface }} />
+      <TextInput placeholder="Nome" value={nome} onChangeText={setNome} style={{ borderWidth: 1, borderColor: colors.border, borderRadius: 8, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm, backgroundColor: colors.surface }} /> {/* Campo nome */}
 
       <Text style={[typography.h3, { marginTop: spacing.sm, color: colors.text }]}>Entrega</Text>
-      <View style={{ flexDirection: 'row', gap: spacing.sm }}>
+      <View style={{ flexDirection: 'row', gap: spacing.sm }}> {/* Escolha de entrega */}
         {(['local', 'retirada', 'delivery'] as const).map(t => (
           <TouchableOpacity key={t} onPress={() => setEntrega(t)} style={{ paddingVertical: spacing.sm, paddingHorizontal: spacing.lg, borderRadius: 999, backgroundColor: entrega === t ? colors.primary : colors.surfaceMuted }}>
             <Text style={{ color: entrega === t ? colors.white : colors.text }}>{t}</Text>
@@ -45,7 +45,7 @@ export default function CheckoutScreen() {
       </View>
 
       <Text style={[typography.h3, { marginTop: spacing.sm, color: colors.text }]}>Pagamento</Text>
-      <View style={{ flexDirection: 'row', gap: spacing.sm }}>
+      <View style={{ flexDirection: 'row', gap: spacing.sm }}> {/* Escolha de pagamento */}
         {(['dinheiro', 'cartao', 'pix'] as const).map(m => (
           <TouchableOpacity key={m} onPress={() => setPagamento(m)} style={{ paddingVertical: spacing.sm, paddingHorizontal: spacing.lg, borderRadius: 999, backgroundColor: pagamento === m ? colors.primary : colors.surfaceMuted }}>
             <Text style={{ color: pagamento === m ? colors.white : colors.text }}>{m}</Text>
@@ -53,9 +53,9 @@ export default function CheckoutScreen() {
         ))}
       </View>
 
-      <View style={{ marginTop: 'auto', gap: spacing.sm }}>
+      <View style={{ marginTop: 'auto', gap: spacing.sm }}> {/* Rodapé com total e ação */}
         <Text style={[typography.body, { color: colors.text }]}>Total: <Text style={{ fontWeight: '700' }}>{formatCurrency(total)}</Text></Text>
-        <TouchableOpacity onPress={confirmar} style={{ backgroundColor: colors.primary, paddingVertical: spacing.md, borderRadius: 8, alignItems: 'center' }}>
+        <TouchableOpacity onPress={confirmar} style={{ backgroundColor: colors.primary, paddingVertical: spacing.md, borderRadius: 8, alignItems: 'center' }}> {/* Confirmar pedido */}
           <Text style={{ color: colors.white, fontWeight: '700' }}>Confirmar pedido</Text>
         </TouchableOpacity>
       </View>

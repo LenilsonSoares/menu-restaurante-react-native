@@ -13,9 +13,9 @@
  * - Operação de `save` deve substituir completamente o estado atual do
  *   carrinho (não é merge incremental neste contrato).
  */
-import type { CartItem } from '@/domain/cart/models';
+import type { CartItem } from '@/domain/cart/models'; // Importa o tipo de item do carrinho usado nas assinaturas abaixo
 
-export interface CartStorage {
+export interface CartStorage { // Contrato de persistência do carrinho a ser implementado pela camada de infraestrutura
   /**
    * Carrega todos os itens do carrinho a partir do armazenamento.
    *
@@ -27,7 +27,7 @@ export interface CartStorage {
    * - Pode rejeitar se houver falha de I/O, permissão, corrupção de dados ou
    *   problema de desserialização.
    */
-  load(): Promise<CartItem[]>;
+  load(): Promise<CartItem[]>; // Carrega e retorna todos os itens persistidos (ou [] se vazio)
 
   /**
    * Persiste integralmente o estado do carrinho.
@@ -44,5 +44,5 @@ export interface CartStorage {
    * Erros esperados:
    * - Pode rejeitar em cenários de I/O, permissão ou serialização inválida.
    */
-  save(items: CartItem[]): Promise<void>;
+  save(items: CartItem[]): Promise<void>; // Sobrescreve o estado do carrinho persistindo a lista completa de itens
 }

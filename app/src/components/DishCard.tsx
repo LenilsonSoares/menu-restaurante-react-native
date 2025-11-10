@@ -3,11 +3,11 @@
  * - `onPress` abre detalhes (opcional)
  * - `onAdd` adiciona ao carrinho (opcional)
  */
-import React, { useState } from 'react';
-import { View, Text, Pressable, Image, ImageSourcePropType } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { formatCurrency } from '../utils/formatCurrency';
-import { colors, spacing, typography, radius, shadow } from '../theme';
+import React, { useState } from 'react'; // React e estado local para tratar erro de imagem
+import { View, Text, Pressable, Image, ImageSourcePropType } from 'react-native'; // Componentes de UI
+import { MaterialCommunityIcons } from '@expo/vector-icons'; // Ícone para botão de adicionar
+import { formatCurrency } from '../utils/formatCurrency'; // Formatação monetária
+import { colors, spacing, typography, radius, shadow } from '../theme'; // Tokens de design
 
 export function DishCard({
   name,
@@ -30,7 +30,7 @@ export function DishCard({
   onAdd?: () => void;
   dotColor?: string;
 }) {
-  const [imgError, setImgError] = useState(false);
+  const [imgError, setImgError] = useState(false); // Flag para cair no fallback de texto quando imagem falhar
   const src = image
     ? typeof image === 'string'
       ? { uri: image }
@@ -38,30 +38,30 @@ export function DishCard({
     : undefined;
 
   return (
-    <View style={{ backgroundColor: colors.surface, borderRadius: radius.lg, padding: spacing.md, position: 'relative', ...shadow.sm }}>
+    <View style={{ backgroundColor: colors.surface, borderRadius: radius.lg, padding: spacing.md, position: 'relative', ...shadow.sm }}> {/* Card container */}
       <Pressable
-        onPress={onPress}
-        android_ripple={{ color: '#00000010' }}
-        style={({ pressed }) => ({ flexDirection: 'row', gap: spacing.md, opacity: pressed ? 0.95 : 1 })}
+        onPress={onPress} // Abre detalhes se fornecido
+        android_ripple={{ color: '#00000010' }} // Efeito ripple no Android
+        style={({ pressed }) => ({ flexDirection: 'row', gap: spacing.md, opacity: pressed ? 0.95 : 1 })} // Layout em linha
       >
-  <View style={{ width: 96, aspectRatio: 1, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ width: 96, aspectRatio: 1, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }}> {/* Thumb da imagem */}
           {src && !imgError ? (
             <Image
-              source={src as any}
-              style={{ width: '100%', height: '100%', transform: [{ scale: 1.05 }] }}
-              resizeMode="cover"
-              onError={(e) => {
+              source={src as any} // Fonte (URL ou require)
+              style={{ width: '100%', height: '100%', transform: [{ scale: 1.05 }] }} // Leve zoom para impacto visual
+              resizeMode="cover" // Cobre o contêiner
+              onError={(e) => { // Se falhar, marca erro para exibir fallback
                 console.warn('Falha ao carregar imagem do prato', e.nativeEvent);
                 setImgError(true);
               }}
             />
           ) : (
-            <Text style={{ color: colors.textMuted }}>sem imagem</Text>
+            <Text style={{ color: colors.textMuted }}>sem imagem</Text> // Fallback textual
           )}
           {/* Botão '+' removido daqui para manter posição consistente relativa ao card inteiro */}
         </View>
         <View style={{ flex: 1 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs }}> {/* Indicador + nome */}
             {
               (
                 <View
@@ -76,7 +76,7 @@ export function DishCard({
             }
             <Text style={[typography.h3, { color: colors.text }]}>{name}</Text>
           </View>
-          {description ? (
+          {description ? ( // Descrição opcional (máx. 2 linhas)
             <Text numberOfLines={2} style={[typography.body, { color: colors.textMuted, marginTop: spacing.xs }]}>
               {description}
             </Text>
@@ -86,10 +86,10 @@ export function DishCard({
           </Text>
         </View>
       </Pressable>
-      {onAdd ? (
+      {onAdd ? ( // Botão flutuante para adicionar ao carrinho
         <Pressable
-          onPress={() => onAdd?.()}
-          android_ripple={{ color: '#00000010' }}
+          onPress={() => onAdd?.()} // Aciona callback de adicionar
+          android_ripple={{ color: '#00000010' }} // Ripple leve
           style={({ pressed }) => ({
             position: 'absolute',
             right: spacing.md,

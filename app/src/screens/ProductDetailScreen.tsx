@@ -3,27 +3,27 @@
  * Mostra imagem, descrição, preço e permite selecionar quantidade e adicionar ao carrinho.
  */
 
-import React, { useState } from 'react';
-import { View, Text, Image, Alert, ImageSourcePropType, Platform } from 'react-native';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import type { RootStackParamList } from '../navigation/RootNavigator';
-import { products } from '../data/products';
-import { QuantityStepper } from '../components/QuantityStepper';
-import { Button } from '../components/Button';
-import { useCart } from '../state/cart.context';
-import { formatCurrency } from '../utils/formatCurrency';
-import { colors, spacing, typography, radius } from '../theme';
+import React, { useState } from 'react'; // React e estado local para quantidade
+import { View, Text, Image, Alert, ImageSourcePropType, Platform } from 'react-native'; // Componentes de UI e APIs de plataforma
+import { RouteProp, useRoute } from '@react-navigation/native'; // Hook para acessar params da rota
+import type { RootStackParamList } from '../navigation/RootNavigator'; // Tipagem das rotas
+import { products } from '../data/products'; // Dados de produtos
+import { QuantityStepper } from '../components/QuantityStepper'; // Seletor de quantidade
+import { Button } from '../components/Button'; // Botão primário
+import { useCart } from '../state/cart.context'; // Hook do carrinho para adicionar itens
+import { formatCurrency } from '../utils/formatCurrency'; // Formatação monetária
+import { colors, spacing, typography, radius } from '../theme'; // Tokens de design
 
-type DetailRoute = RouteProp<RootStackParamList, 'ProductDetail'>;
+type DetailRoute = RouteProp<RootStackParamList, 'ProductDetail'>; // Tipo da rota de detalhe
 
-export default function ProductDetailScreen() {
-  const route = useRoute<DetailRoute>();
-  const { productId } = route.params;
-  const product = products.find(p => p.id === productId);
-  const [qtd, setQtd] = useState(1);
-  const { add } = useCart();
+export default function ProductDetailScreen() { // Tela que exibe dados de um produto
+  const route = useRoute<DetailRoute>(); // Acesso aos parâmetros de rota
+  const { productId } = route.params; // Extrai id do produto
+  const product = products.find(p => p.id === productId); // Busca produto por id
+  const [qtd, setQtd] = useState(1); // Estado para quantidade selecionada (mínimo 1)
+  const { add } = useCart(); // Ação para adicionar ao carrinho
 
-  if (!product) {
+  if (!product) { // Fallback para caso produto não exista
     return (
       <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}>
         <Text style={[typography.body, { color: colors.textMuted }]}>Produto não encontrado.</Text>
@@ -32,7 +32,7 @@ export default function ProductDetailScreen() {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}>
+    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}> {/* Container principal */}
       <View
         style={{
           width: '100%',
@@ -45,7 +45,7 @@ export default function ProductDetailScreen() {
           ...(Platform.OS === 'web' ? { maxHeight: 420 } : {}),
         }}
       >
-        {product.image ? (
+        {product.image ? ( // Renderiza imagem se houver
           <Image
             source={
               typeof product.image === 'string'
@@ -65,18 +65,18 @@ export default function ProductDetailScreen() {
         ) : null}
       </View>
 
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}> {/* Título e preço lado a lado */}
         <Text style={[typography.h2, { color: colors.text, flex: 1, marginRight: spacing.md }]}>
           {product.name}
         </Text>
         <Text style={[typography.h2, { color: colors.text }]}>{formatCurrency(product.price)}</Text>
       </View>
 
-      <Text style={[typography.body, { color: colors.textMuted, marginTop: spacing.sm }]}>
+      <Text style={[typography.body, { color: colors.textMuted, marginTop: spacing.sm }]}> {/* Descrição do produto */}
         {product.description}
       </Text>
 
-      <View style={{ marginTop: spacing.xl, alignItems: 'center', gap: spacing.lg }}>
+      <View style={{ marginTop: spacing.xl, alignItems: 'center', gap: spacing.lg }}> {/* Seletor de quantidade e botão */}
         <View
           style={{
             flexDirection: 'row',
@@ -94,7 +94,7 @@ export default function ProductDetailScreen() {
           />
         </View>
 
-        <Button
+        <Button // Botão para adicionar ao carrinho com total dinâmico
           title={`Adicionar (${formatCurrency(product.price * qtd)})`}
           onPress={() => {
             add({
