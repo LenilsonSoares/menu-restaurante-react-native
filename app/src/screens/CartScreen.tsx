@@ -18,7 +18,7 @@ export default function CartScreen() { // Tela que lista itens do carrinho e mos
   const { items, subtotal, fee, total, increment, decrement, remove } = useCart(); // Estado e casos de uso do carrinho
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}> {/* Container da tela */}
+    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}>
       {items.length === 0 ? ( // Condicional: carrinho vazio
         <Text style={[typography.body, { color: colors.textMuted }]}>Seu carrinho está vazio.</Text>
       ) : (
@@ -28,23 +28,23 @@ export default function CartScreen() { // Tela que lista itens do carrinho e mos
             keyExtractor={(i) => i.productId} // Chave por productId
             ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: colors.border }} />} // Linha separadora
             renderItem={({ item }) => (
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 10 }}> {/* Linha de item */}
-                <View style={{ flex: 1 }}> {/* Info do produto */}
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 10 }}>
+                <View style={{ flex: 1 }}>
                   <Text style={[typography.body, { fontWeight: '600', color: colors.text }]}>{item.name}</Text>
                   <Text style={[typography.caption, { color: colors.textMuted }]}>{formatCurrency(item.price)}</Text>
                 </View>
-                <QuantityStepper value={item.quantity} onDec={() => decrement(item.productId)} onInc={() => increment(item.productId)} /> {/* Ajuste de quantidade */}
-                <TouchableOpacity onPress={() => remove(item.productId)} style={{ paddingLeft: spacing.md }}> {/* Remover item */}
+                <QuantityStepper value={item.quantity} onDec={() => decrement(item.productId)} onInc={() => increment(item.productId)} />
+                <TouchableOpacity onPress={() => remove(item.productId)} style={{ paddingLeft: spacing.md }}>
                   <Text style={{ color: colors.danger }}>Remover</Text>
                 </TouchableOpacity>
               </View>
             )}
           />
-          <View style={{ borderTopWidth: 1, borderTopColor: colors.border, paddingTop: spacing.md, gap: spacing.xs }}> {/* Totais */}
+          <View style={{ borderTopWidth: 1, borderTopColor: colors.border, paddingTop: spacing.md, gap: spacing.xs }}>
             <Text style={[typography.body, { color: colors.text }]}>Subtotal: {formatCurrency(subtotal)}</Text>
-            {fee > 0 && <Text style={[typography.body, { color: colors.text }]}>Taxa: {formatCurrency(fee)}</Text>} {/* Taxa opcional */}
+            {fee > 0 && <Text style={[typography.body, { color: colors.text }]}>Taxa: {formatCurrency(fee)}</Text>}
             <Text style={[typography.h3, { color: colors.text }]}>Total: {formatCurrency(total)}</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Checkout')} style={{ backgroundColor: colors.primary, paddingVertical: spacing.md, borderRadius: 8, alignItems: 'center', marginTop: spacing.sm }}> {/* Botão de checkout */}
+            <TouchableOpacity onPress={() => navigation.navigate('Checkout')} style={{ backgroundColor: colors.primary, paddingVertical: spacing.md, borderRadius: 8, alignItems: 'center', marginTop: spacing.sm }}>
               <Text style={{ color: colors.white, fontWeight: '700' }}>Ir para o checkout</Text>
             </TouchableOpacity>
           </View>

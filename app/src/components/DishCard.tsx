@@ -38,13 +38,13 @@ export function DishCard({
     : undefined;
 
   return (
-    <View style={{ backgroundColor: colors.surface, borderRadius: radius.lg, padding: spacing.md, position: 'relative', ...shadow.sm }}> {/* Card container */}
+  <View style={{ backgroundColor: colors.surface, borderRadius: radius.lg, padding: spacing.md, position: 'relative', ...shadow.sm }}>
       <Pressable
         onPress={onPress} // Abre detalhes se fornecido
         android_ripple={{ color: '#00000010' }} // Efeito ripple no Android
         style={({ pressed }) => ({ flexDirection: 'row', gap: spacing.md, opacity: pressed ? 0.95 : 1 })} // Layout em linha
       >
-        <View style={{ width: 96, aspectRatio: 1, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }}> {/* Thumb da imagem */}
+  <View style={{ width: 96, aspectRatio: 1, backgroundColor: colors.surfaceMuted, borderRadius: radius.lg, overflow: 'hidden', alignItems: 'center', justifyContent: 'center' }}>
           {src && !imgError ? (
             <Image
               source={src as any} // Fonte (URL ou require)
@@ -58,22 +58,18 @@ export function DishCard({
           ) : (
             <Text style={{ color: colors.textMuted }}>sem imagem</Text> // Fallback textual
           )}
-          {/* Botão '+' removido daqui para manter posição consistente relativa ao card inteiro */}
+          
         </View>
         <View style={{ flex: 1 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs }}> {/* Indicador + nome */}
-            {
-              (
-                <View
-                  style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: 2,
-                    backgroundColor: dotColor ?? colors.success,
-                  }}
-                />
-              )
-            }
+            <View
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: 2,
+                backgroundColor: dotColor ?? colors.success,
+              }}
+            />
             <Text style={[typography.h3, { color: colors.text }]}>{name}</Text>
           </View>
           {description ? ( // Descrição opcional (máx. 2 linhas)

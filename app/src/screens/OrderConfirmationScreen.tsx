@@ -13,7 +13,7 @@ export default function OrderConfirmationScreen() { // Tela simples que mostra o
   const route = useRoute<ConfRoute>(); // Acesso aos parâmetros da rota
   const { orderId } = route.params; // Código do pedido gerado no checkout
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background, alignItems: 'center', justifyContent: 'center', padding: spacing.lg }}> {/* Centro da tela */}
+    <View style={{ flex: 1, backgroundColor: colors.background, alignItems: 'center', justifyContent: 'center', padding: spacing.lg }}>
       <Text style={[typography.h1, { marginBottom: spacing.sm, color: colors.text }]}>Pedido confirmado 🎉</Text>
       <Text style={[typography.body, { color: colors.textMuted }]}>Código do pedido:</Text>
       <Text style={[typography.h3, { marginTop: 4, color: colors.text }]}>{orderId}</Text>

@@ -40,8 +40,8 @@ const theme = { // Personaliza levemente o tema, mantendo cores padrão e fundo 
 
 export default function RootNavigator() { // Componente que define a árvore de navegação do app
   return (
-    <NavigationContainer theme={theme}> {/* Contêiner raiz que aplica tema e estado de navegação */}
-      <Stack.Navigator> {/* Pilha de telas principal do app */}
+    <NavigationContainer theme={theme}>
+      <Stack.Navigator>
         <Stack.Screen
           name="Home" // Rota: Home
           component={HomeScreen} // Componente associado
@@ -66,8 +66,8 @@ export default function RootNavigator() { // Componente que define a árvore de 
             headerRight: () => <CartBadge onPress={() => navigation.navigate('Cart')} />, // Badge do carrinho
           })}
         />
-        <Stack.Screen name="Cart" component={CartScreen} options={{ title: 'Carrinho' }} /> {/* Tela do carrinho */}
-        <Stack.Screen name="Checkout" component={CheckoutScreen} options={{ title: 'Checkout' }} /> {/* Tela de checkout */}
+        <Stack.Screen name="Cart" component={CartScreen} options={{ title: 'Carrinho' }} />
+        <Stack.Screen name="Checkout" component={CheckoutScreen} options={{ title: 'Checkout' }} />
         <Stack.Screen
           name="OrderConfirmation"
           component={OrderConfirmationScreen}

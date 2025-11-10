@@ -51,15 +51,13 @@ export default function HomeScreen() { // Componente da tela inicial
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background }}> {/* Container principal da tela */}
-      {/* Conteúdo rolável */}
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
       <SectionList
         sections={sections as any} // Seções definidas acima
         keyExtractor={(item: any, index) => (Array.isArray(item) ? `${item[0]?.id || 'row'}-${index}` : item.id)} // Chave para cada item/linha
         contentContainerStyle={{ padding: spacing.lg, paddingBottom: spacing.xl, gap: spacing.lg }} // Espaçamento do conteúdo
-        ListHeaderComponent={ // Cabeçalho com banner e lista de categorias
+        ListHeaderComponent={
           <View>
-            {/* Banner/Logo */}
             <View
               style={{
                 backgroundColor: colors.surface,
@@ -72,8 +70,6 @@ export default function HomeScreen() { // Componente da tela inicial
               <Text style={[typography.h1, { color: colors.text, textAlign: 'center' }]}>Tempero</Text>
               <Text style={[typography.h2, { color: colors.success, fontStyle: 'italic' }]}>da Itália</Text>
             </View>
-
-            {/* Abas de categorias */}
             <View
               style={{
                 backgroundColor: colors.primaryDark,
@@ -83,11 +79,11 @@ export default function HomeScreen() { // Componente da tela inicial
                 marginBottom: spacing.md,
               }}
             >
-              <CategoryList categories={categories} /> {/* Renderiza a lista de categorias como atalhos */}
+              <CategoryList categories={categories} />
             </View>
           </View>
         }
-        renderSectionHeader={({ section }) => ( // Cabeçalho de cada seção com título da categoria
+        renderSectionHeader={({ section }) => (
           <Text style={[typography.h3, { color: colors.text, marginTop: spacing.sm, marginBottom: spacing.sm }]}>
             {section.title}
           </Text>
@@ -111,7 +107,7 @@ export default function HomeScreen() { // Componente da tela inicial
           }
           const row: Product[] = item as Product[];
           return (
-            <View style={{ flexDirection: 'row', gap: spacing.lg }}> {/* Linha com 2 colunas em telas largas */}
+            <View style={{ flexDirection: 'row', gap: spacing.lg }}>
               {[0, 1].map((col) => {
                 const it = row[col];
                 if (!it) return <View key={`empty-${col}`} style={{ flex: 1 }} />; // Preenche coluna vazia para manter layout

@@ -12,12 +12,12 @@ import { colors, spacing, typography, radius } from '../theme'; // Tokens de des
 
 export function QuantityStepper({ value, onDec, onInc }: { value: number; onDec: () => void; onInc: () => void }) { // Controle de quantidade
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}> {/* Linha com botões e valor */}
-      <TouchableOpacity onPress={onDec} style={{ paddingHorizontal: spacing.md, paddingVertical: spacing.sm, backgroundColor: colors.surfaceMuted, borderRadius: radius.sm }}> {/* Botão '-' */}
+  <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}>
+  <TouchableOpacity onPress={onDec} style={{ paddingHorizontal: spacing.md, paddingVertical: spacing.sm, backgroundColor: colors.surfaceMuted, borderRadius: radius.sm }}>
         <MaterialCommunityIcons name="minus" size={18} color={colors.text} />
       </TouchableOpacity>
-      <Text style={[typography.body, { minWidth: 24, textAlign: 'center' }]}>{value}</Text> {/* Valor atual */}
-      <TouchableOpacity onPress={onInc} style={{ paddingHorizontal: spacing.md, paddingVertical: spacing.sm, backgroundColor: colors.surfaceMuted, borderRadius: radius.sm }}> {/* Botão '+' */}
+  <Text style={[typography.body, { minWidth: 24, textAlign: 'center' }]}>{value}</Text>
+  <TouchableOpacity onPress={onInc} style={{ paddingHorizontal: spacing.md, paddingVertical: spacing.sm, backgroundColor: colors.surfaceMuted, borderRadius: radius.sm }}>
         <MaterialCommunityIcons name="plus" size={18} color={colors.text} />
       </TouchableOpacity>
     </View>

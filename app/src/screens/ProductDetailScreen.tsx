@@ -32,7 +32,7 @@ export default function ProductDetailScreen() { // Tela que exibe dados de um pr
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}> {/* Container principal */}
+  <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}>
       <View
         style={{
           width: '100%',
@@ -65,18 +65,18 @@ export default function ProductDetailScreen() { // Tela que exibe dados de um pr
         ) : null}
       </View>
 
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}> {/* Título e preço lado a lado */}
+  <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <Text style={[typography.h2, { color: colors.text, flex: 1, marginRight: spacing.md }]}>
           {product.name}
         </Text>
         <Text style={[typography.h2, { color: colors.text }]}>{formatCurrency(product.price)}</Text>
       </View>
 
-      <Text style={[typography.body, { color: colors.textMuted, marginTop: spacing.sm }]}> {/* Descrição do produto */}
+  <Text style={[typography.body, { color: colors.textMuted, marginTop: spacing.sm }]}> 
         {product.description}
       </Text>
 
-      <View style={{ marginTop: spacing.xl, alignItems: 'center', gap: spacing.lg }}> {/* Seletor de quantidade e botão */}
+  <View style={{ marginTop: spacing.xl, alignItems: 'center', gap: spacing.lg }}>
         <View
           style={{
             flexDirection: 'row',

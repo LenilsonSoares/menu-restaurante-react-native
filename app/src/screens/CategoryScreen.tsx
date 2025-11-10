@@ -30,7 +30,7 @@ export default function CategoryScreen() { // Tela para listar produtos de uma c
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}> {/* Container principal */}
+    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg }}>
       <FlatList
         data={filtered} // Produtos filtrados
         keyExtractor={(item) => item.id} // Usa id do produto como chave

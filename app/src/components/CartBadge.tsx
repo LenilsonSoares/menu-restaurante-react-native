@@ -16,8 +16,8 @@ export function CartBadge({ onPress }: { onPress: () => void }) { // Botão que 
       hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }} // Aumenta área clicável além do conteúdo visível
       style={{ paddingHorizontal: 12, paddingVertical: 6 }} // Espaçamento interno para toque confortável
     >
-      <View style={{ position: 'relative' }}> {/* Contêiner relativo para posicionar badge sobre o ícone */}
-        <Text style={{ fontSize: 18 }}>🛒</Text> {/* Ícone (emoji) do carrinho */}
+      <View style={{ position: 'relative' }}>
+        <Text style={{ fontSize: 18 }}>🛒</Text>
         {count > 0 && ( // Renderiza badge somente se houver itens
           <View
             style={{
@@ -30,7 +30,7 @@ export function CartBadge({ onPress }: { onPress: () => void }) { // Botão que 
               minWidth: 16, // Garante largura mínima para dígitos simples
             }}
           >
-            <Text style={{ color: colors.white, fontSize: 12, fontWeight: '700', textAlign: 'center' }}>{count}</Text> {/* Número de unidades */}
+            <Text style={{ color: colors.white, fontSize: 12, fontWeight: '700', textAlign: 'center' }}>{count}</Text>
           </View>
         )}
       </View>

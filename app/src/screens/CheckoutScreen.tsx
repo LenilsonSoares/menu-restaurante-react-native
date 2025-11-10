@@ -31,12 +31,12 @@ export default function CheckoutScreen() { // Tela de checkout e confirmação
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg, gap: spacing.md }}> {/* Container */}
+    <View style={{ flex: 1, backgroundColor: colors.background, padding: spacing.lg, gap: spacing.md }}>
       <Text style={[typography.h3, { color: colors.text }]}>Seus dados</Text>
-      <TextInput placeholder="Nome" value={nome} onChangeText={setNome} style={{ borderWidth: 1, borderColor: colors.border, borderRadius: 8, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm, backgroundColor: colors.surface }} /> {/* Campo nome */}
+  <TextInput placeholder="Nome" value={nome} onChangeText={setNome} style={{ borderWidth: 1, borderColor: colors.border, borderRadius: 8, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm, backgroundColor: colors.surface }} />
 
       <Text style={[typography.h3, { marginTop: spacing.sm, color: colors.text }]}>Entrega</Text>
-      <View style={{ flexDirection: 'row', gap: spacing.sm }}> {/* Escolha de entrega */}
+  <View style={{ flexDirection: 'row', gap: spacing.sm }}>
         {(['local', 'retirada', 'delivery'] as const).map(t => (
           <TouchableOpacity key={t} onPress={() => setEntrega(t)} style={{ paddingVertical: spacing.sm, paddingHorizontal: spacing.lg, borderRadius: 999, backgroundColor: entrega === t ? colors.primary : colors.surfaceMuted }}>
             <Text style={{ color: entrega === t ? colors.white : colors.text }}>{t}</Text>
@@ -45,7 +45,7 @@ export default function CheckoutScreen() { // Tela de checkout e confirmação
       </View>
 
       <Text style={[typography.h3, { marginTop: spacing.sm, color: colors.text }]}>Pagamento</Text>
-      <View style={{ flexDirection: 'row', gap: spacing.sm }}> {/* Escolha de pagamento */}
+  <View style={{ flexDirection: 'row', gap: spacing.sm }}>
         {(['dinheiro', 'cartao', 'pix'] as const).map(m => (
           <TouchableOpacity key={m} onPress={() => setPagamento(m)} style={{ paddingVertical: spacing.sm, paddingHorizontal: spacing.lg, borderRadius: 999, backgroundColor: pagamento === m ? colors.primary : colors.surfaceMuted }}>
             <Text style={{ color: pagamento === m ? colors.white : colors.text }}>{m}</Text>
@@ -53,9 +53,9 @@ export default function CheckoutScreen() { // Tela de checkout e confirmação
         ))}
       </View>
 
-      <View style={{ marginTop: 'auto', gap: spacing.sm }}> {/* Rodapé com total e ação */}
+  <View style={{ marginTop: 'auto', gap: spacing.sm }}>
         <Text style={[typography.body, { color: colors.text }]}>Total: <Text style={{ fontWeight: '700' }}>{formatCurrency(total)}</Text></Text>
-        <TouchableOpacity onPress={confirmar} style={{ backgroundColor: colors.primary, paddingVertical: spacing.md, borderRadius: 8, alignItems: 'center' }}> {/* Confirmar pedido */}
+  <TouchableOpacity onPress={confirmar} style={{ backgroundColor: colors.primary, paddingVertical: spacing.md, borderRadius: 8, alignItems: 'center' }}>
           <Text style={{ color: colors.white, fontWeight: '700' }}>Confirmar pedido</Text>
         </TouchableOpacity>
       </View>

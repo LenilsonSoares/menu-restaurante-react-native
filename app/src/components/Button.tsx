@@ -24,7 +24,7 @@ export function Button({ title, onPress }: { title: string; onPress: () => void 
         shadow.sm, // Sombra sutil
       ])}
     >
-      <Text style={[typography.body, { color: colors.white, fontWeight: '700' }]}>{title}</Text> {/* Rótulo do botão */}
+  <Text style={[typography.body, { color: colors.white, fontWeight: '700' }]}>{title}</Text>
     </Pressable>
   );
 }
