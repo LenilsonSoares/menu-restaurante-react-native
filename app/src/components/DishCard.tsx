@@ -61,7 +61,7 @@ export function DishCard({
           
         </View>
         <View style={{ flex: 1 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs }}> {/* Indicador + nome */}
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.xs }}>
             <View
               style={{
                 width: 10,
